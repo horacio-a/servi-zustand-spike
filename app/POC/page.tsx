@@ -4,8 +4,11 @@ import Footer from "@/components/Footer";
 import Navbar from "@/components/Header";
 import { useStore } from "@/store/orderStore";
 import Modal from "@/components/poc/modal";
+import { useEffect, useState } from "react";
 
 export default function Home() {
+  const [subscribeText, setsubscribeText] = useState(false);
+
   const { task, deleteTask, changeState } = useStore((state) => state);
 
   const addHandleClick = (deletedId: number) => {
@@ -16,6 +19,25 @@ export default function Home() {
     changeState(Id, status);
   };
 
+  useEffect(() => {
+    if (useStore.getState().task.length >= 6) {
+      setsubscribeText(true);
+    } else {
+      setsubscribeText(false);
+    }
+
+    useStore.subscribe(
+      (state) => state.task,
+      (task) => {
+        if (task.length >= 6) {
+          setsubscribeText(true);
+        } else {
+          setsubscribeText(false);
+        }
+      }
+    );
+  }, []);
+
   return (
     <>
       <main className="flex min-h-screen flex-col items-center justify-between">
@@ -25,13 +47,15 @@ export default function Home() {
             {task.map((task) => {
               return (
                 <div key={task.id} className=" bg-black  block rounded-lg p-6 ">
-                  <div
-                    onClick={() => {
-                      addHandleClick(task.id);
-                    }}
-                    className="text-white text-xl text-right cursor-pointer"
-                  >
-                    &times;
+                  <div className="flex justify-end">
+                    <div
+                      className="text-white text-xl text-right cursor-pointer w-fit	"
+                      onClick={() => {
+                        addHandleClick(task.id);
+                      }}
+                    >
+                      &times;{" "}
+                    </div>
                   </div>
                   <h5 className="mb-2 text-xl text-center	 font-medium leading-tight text-neutral-800 dark:text-neutral-50">
                     {task.title}
@@ -87,8 +111,31 @@ export default function Home() {
         <div className="flex flex-col	">
           <Modal />
           <p>
+            {subscribeText ? (
+              <div className="text-center">
+                The button is deactivated with a
+                <a
+                  className="font-semibold text-gray-900 hover:text-indigo-600"
+                  href="/doc/subscribe"
+                >
+                  {" "}
+                  subscribe
+                </a>
+              </div>
+            ) : (
+              ""
+            )}
+          </p>
+
+          <p>
             To closely follow the statuses you can use the{" "}
-            <a href="/doc/devtools"> Redux devtools</a>
+            <a
+              className="font-semibold text-gray-900 hover:text-indigo-600"
+              href="/doc/devtools"
+            >
+              {" "}
+              Redux devtools
+            </a>
           </p>
         </div>
         <Footer></Footer>
