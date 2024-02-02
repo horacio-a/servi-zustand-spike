@@ -44,7 +44,7 @@ export default function SetMain() {
                   CREATE
                 </a>{" "}
                 function and defining a variable as seen in the example, we can
-                create a function, and if we use the
+                create a function, and if we use the{" "}
                 <b className="font-semibold text-gray-900 ">SET</b> property
                 mentioned above we will be able to update the state of our
                 variable
