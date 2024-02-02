@@ -40,7 +40,7 @@ const Menu = () => {
             <SingleCard
               CardTitle="SUBSCRIBE"
               CardDescription=""
-              Redirect={"/doc/subcribe"}
+              Redirect={"/doc/subscribe"}
             />
 
             <SingleCard
