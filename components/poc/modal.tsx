@@ -11,6 +11,12 @@ export default function Modal() {
   const [AddButtonState, setAddButtonState] = useState(false);
 
   useEffect(() => {
+    if (useStore.getState().task.length >= 6) {
+      setAddButtonState(true);
+    } else {
+      setAddButtonState(false);
+    }
+
     useStore.subscribe(
       (state) => state.task,
       (task) => {
