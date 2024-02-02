@@ -12,7 +12,7 @@ export default function SubcribeMain() {
                 SUBSCRIBE
               </p>
               <h1 className="mt-2 text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
-                Running code with subcribe
+                Running code with subscribe
               </h1>
               <p className="mt-6 text-xl leading-8 text-gray-700">
                 Subscribe is a feature that allows you to subscribe to changes
